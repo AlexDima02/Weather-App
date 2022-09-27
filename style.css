@@ -1,0 +1,328 @@
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body{
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    background-image: url('./images/pexels-brett-sayles-912364.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+
+
+header{
+
+   
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    background: transparent;
+    position: relative;
+
+}
+
+.logo{
+    
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 100vh;
+
+
+}
+
+
+/* Default state - widgets slide */
+
+.widget-container{
+
+    
+    /* float: right; */
+    max-width: 500px;
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+    color: rgba(235, 235, 235, 0.973);
+    /* position: fixed; */
+    /* top: 0;
+    right: 0; */
+    /* transform: translateX(100%); */
+    transition: all 0.3s ease-in;
+    
+
+}
+
+/* Active state - widgets slide */
+
+.widget-container.active{
+
+    transform: translateX(0);
+    
+
+
+}
+
+
+.info-section{
+
+
+    padding: 1.5rem 2rem;
+
+}
+
+.widget-city{
+
+    padding-left: 2rem;
+
+}
+
+.foreground{
+    
+    backdrop-filter: blur(10px);
+    filter: blur(4px);
+
+}
+
+.section-name h2{
+
+    margin: 1.5rem 0;
+    border-top: solid 0.1rem rgba(235, 235, 235, 0.973);
+    padding: 1.5rem 0;
+}
+
+.weather-details{
+
+    transition: all 1s ease-in;
+    display: none;
+
+}
+
+.weather-details.active{
+
+    display: block;
+
+
+}
+
+.weather-details h2{
+
+    margin-top: 1.5rem;
+    font-size: 100%;
+
+}
+
+
+/* Customizing search form */
+
+.widget-container input[type=text]{
+
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(235, 235, 235, 0.973);
+    color: rgba(235, 235, 235, 0.973);
+    padding: 0.5rem;
+    width: 85%;
+    line-height: 2rem;
+    font-size: 1.8rem;
+
+}
+
+.widget-container input[type=text]::placeholder{
+
+    color: rgba(235, 235, 235, 0.432);
+
+
+
+}
+
+
+.search-form{
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    vertical-align: baseline;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    
+}
+
+.widget-container .submit-btn{
+
+    padding: 2rem 2rem;
+    margin-left: 1.5rem;
+    color: black;
+    font-size: 1.5rem;
+    background-color: orange;
+    outline: none;
+    border: none;
+
+}
+
+/* Default state - open btn */
+
+header .open-slide{
+
+    padding: 2rem 2rem;
+    margin-left: 1.5rem;
+    color: black;
+    font-size: 1.5rem;
+    background-color: orange;
+    outline: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+
+}
+
+/* Active state - open btn */
+
+header .open-slide.active{
+
+    
+    display: none;
+
+
+}
+
+/* Widget display  */
+
+.widget-display{
+
+    display: flex;
+    flex-grow: 1;
+    border: 1px solid red;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+
+}
+
+.widget-items{
+
+    border: 1px solid red;
+    display: flex;
+    vertical-align: baseline;
+    align-items: center;
+    color: white;
+    margin-left: 5rem;
+}
+
+.widget-items h1{
+
+    font-size: 5.5rem;
+
+
+
+}
+
+.item-details{
+
+    margin: 0 1.5rem;
+
+}
+
+.item-details .location{
+    
+    font-size: 2.5rem;
+
+
+}
+
+.item-details .current-time{
+
+    font-size: 1.3rem;
+
+}
+
+.weather-type{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.weather-type p{
+
+    font-size: 1.2rem;
+    
+
+}
+
+
+/* Temperature next days predictions */
+
+.days{
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    padding: 1.5rem 0;
+    
+    
+}
+
+.days.active{
+
+    transition: all 1s ease-in;
+    border-bottom: solid 0.1rem rgba(235, 235, 235, 0.973);
+
+}
+
+
+.weather-condtion{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.weather-condtion p{
+
+    font-size: 1rem;
+
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+   
+    .widget-container{
+
+        position: relative;
+
+
+    }
+
+  }

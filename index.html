@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>the.weather</title>
+</head>
+<body>
+
+    <header>
+
+       
+            
+            <div class="logo">
+                
+                <!-- <img src="" alt="logo-image"> -->
+                <h1>the.weather</h1>
+
+            </div>
+
+            <button type="submit" class="open-slide"><i class="fa-solid fa-magnifying-glass"></i></button>
+        
+
+    </header>
+
+    <main>
+        
+        <div class="container">
+
+        <div class="widget-container">
+            
+            <div class="widget-city">
+            
+                <form class="search-form" action="">
+        
+                    <input type="text" name="search" class="search-input" placeholder="Another location">
+                    <button type="submit" class="submit-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    
+        
+        
+        
+                </form>
+        
+            </div>
+            
+            <div class="info-section">
+
+                <h1 class="country-name"></h1>
+                
+                <div class="saved-locations"></div>
+
+                <div class="section-name">
+
+
+                    <h2>Weather Details:</h2>   
+
+
+                </div>
+                
+        
+                <div class="weather-details">
+                    
+                    <h2 class="temp-standard">Temp:<span></span></h2>
+                    <h2 class="temp-min">Temp min: <span></span></h2>
+                    <h2 class="temp-max">Temp max: <span></span></h2>
+                    <h2 class="feels-like">Feels like: <span></span></h2>
+                    <h2 class="clouds">Clouds: <span></span></h2>
+                    <h2 class="humidity">Humidity: <span></span></h2>
+                    <h2 class="wind">Wind: <span></span></h2>
+                </div>
+
+                
+
+            </div>
+
+
+            <div class="info-section">
+
+                <h1 class="country-name"></h1>
+                
+                <div class="section-name">
+
+
+                    <h2>Next Days:</h2>   
+
+
+                </div>
+                
+        
+                <div class="days-forecast">
+                    
+                    <div id='0' class="days">
+                        <h2></h2>
+                        <div id="day0" class="weather-condtion">
+                            <h2></h2>
+                            <p></p>
+
+                        </div>
+
+                    </div>
+                    <div id='1' class="days">
+                        <h2></h2>
+                        <div id="day1" class="weather-condtion">
+                            <h2></h2>
+                            <p></p>
+
+                        </div>
+
+                    </div>
+                    <div id='2' class="days">
+                        <h2></h2>
+                        <div id="day2" class="weather-condtion">
+                            <h2></h2>
+                            <p></p>
+
+                        </div>
+
+                    </div>
+                    <div id='3' class="days">
+                        <h2></h2>
+                        <div id="day3" class="weather-condtion">
+                            <h2></h2>
+                            <p></p>
+
+                        </div>
+
+                    </div>
+                    <!-- <div id='4' class="days">
+                        <h2></h2>
+                        <div id="day4" class="weather-condtion">
+                            <h2></h2>
+                            <p></p>
+
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+                
+
+            </div>
+            <div class="foreground"></div>
+        
+        </div>
+
+        <div class="widget-display">
+
+            <div class="widget-items">
+
+                <h1 class="current-temperature"><span></span></h1>
+
+                <div class="item-details">
+
+                    <h3 class="location"><span></span></h3>
+                    <h2 class="current-time"><time datetime="YYYY-MM-DDThh:mm"></time></h2>
+
+                </div>
+
+                <div class="weather-type"><img src=""/></div>
+
+
+            </div>
+
+
+        </div>
+        
+        </div>
+
+    </main>
+
+
+    
+    <script src="./app.js"></script>
+</body>
+</html>
