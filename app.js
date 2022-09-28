@@ -348,7 +348,7 @@ function saveToLocal(city, data){
 
 
         save = [];
-        
+       
 
 
     }else {
@@ -359,45 +359,84 @@ function saveToLocal(city, data){
 
         // Avoid duplicates by applying a filtering in the save array after it parses the values 
         
-        save = save.filter((value, index, self) =>
-        index === self.findIndex((t) => (
-            t.id === value.id && t.name === value.name
+        // save = save.filter((value, index, self) =>
+        // index === self.findIndex((t) => (
+
+        //     t.id === value.id && t.name === value.name
             
-        ))
-        );
+        // ))
+        // );
 
     // Create a container to display the items saved in the local storage
-    // Check if there is an item with the same id and in case it is, return nothing to avoid duplicates 
+    // Make an array that don't allow duplicates 
+    // Iterate over array and take the only the new added items that we want to display in the h tag        
+    
         
-        const cityName = document.createElement('h1');
-        cityName.classList.add('locations');
-        savedLocations.appendChild(cityName);
-        cityName.innerHTML = city;
+            
+            
+
+
+
+        
+            
+            
+
+
+       
+       
+        
 
     // Store the latest cities searched in a container 
     // When i click on each city searched, display the data about it
         
         let stored = city;
         
-    cityName.addEventListener('click', () => {
+    // cityName.addEventListener('click', () => {
         
-         displayData(stored);
-         nextDaysData(stored);
-         cityName.innerHTML = '';
+    //      displayData(stored);
+    //      nextDaysData(stored);
+    //      cityName.innerHTML = '';
          
-    })
+    // })
         
 
 
     }
-    
+
+    // Display only the new added items
+    // The rest need to stay on the location history
+
+    const uniqData = [...save.reduce((map, obj) => map.set(obj.id, obj), new Map()).values()];        
+       
+    console.log(uniqData);
+
+    uniqData.forEach((element) => {
+
+        console.log(element);
+        if(element){
+
+            const cityName = document.createElement('h1');
+            cityName.classList.add('locations');
+            savedLocations.appendChild(cityName);
+            cityName.innerHTML = element.name;
+
+        }else{
+
+            cityName.innerHTML = '';
+
+
+        }
+        
+
+
+    })
+        
+        
+            
+
+            
 
     save.push(data);
-
-    
-
-
-    
 
     localStorage.setItem('locations', JSON.stringify(save));
 
