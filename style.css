@@ -11,8 +11,8 @@ body{
 
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    background-image: url('./images/pexels-brett-sayles-912364.jpg');
-    background-size: cover;
+    background-image: url('./images/image3.jpg');
+    background-size: 200%;
     background-repeat: no-repeat;
 
 }
@@ -31,11 +31,12 @@ header{
 
 }
 
+
 .logo{
     
     padding: 1rem 2rem;
     font-size: 0.8rem;
-    color: white;
+    color: orange;
 }
 
 .container{
@@ -55,16 +56,16 @@ header{
 .widget-container{
 
     
-    /* float: right; */
+    float: right;
     max-width: 500px;
     width: 100%;
     min-height: 100vh;
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0), rgb(0, 0, 0));
     color: rgba(235, 235, 235, 0.973);
-    /* position: fixed; */
-    /* top: 0;
-    right: 0; */
-    /* transform: translateX(100%); */
+    position: absolute;
+    top: 0;
+    right: 0; 
+    transform: translateX(100%);
     transition: all 0.3s ease-in;
     
 
@@ -213,17 +214,17 @@ header .open-slide.active{
 
     display: flex;
     flex-grow: 1;
-    border: 1px solid red;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-
-
+    position: fixed;
+    top: 0;
+    bottom: -50%;
 }
 
 .widget-items{
 
-    border: 1px solid red;
+   
     display: flex;
     vertical-align: baseline;
     align-items: center;
@@ -277,51 +278,68 @@ header .open-slide.active{
 
 /* Temperature next days predictions */
 
-.days{
+.date{
 
     display: flex;
     flex-direction: row;
-    width: 100%;
     justify-content: space-between;
-    font-size: 1.5rem;
-    padding: 1.5rem 0;
-    
+    border-bottom: 1px solid white;
+    padding: 2rem 0;
     
 }
 
-.days.active{
-
-    transition: all 1s ease-in;
-    border-bottom: solid 0.1rem rgba(235, 235, 235, 0.973);
-
-}
-
-
-.weather-condtion{
+.weather-condition{
 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
+
 
 }
 
-.weather-condtion p{
+p .weather-image{
 
-    font-size: 1rem;
+    width: 80px;
+    height: auto;
+
 
 }
 
 
+.weather-type img{
+
+    width: 40%;
+    height: auto;
 
 
-@media screen and (max-width: 480px) {
+}
+
+
+@media screen and (max-width: 580px) {
    
     .widget-container{
 
         position: relative;
+        
 
+    }
+
+    .widget-container.active{
+
+        position: relative;
+        top: 100;
+    }
+
+    .widget-display{
+
+        display: none;
+        
+    }
+
+    body{
+
+        background-size: cover;
 
     }
 
