@@ -1,4 +1,5 @@
 const auth = "5d8d0f350c51c38d0174906526cc3a21";
+const auth2 = "lnGbZdhXxlr7kaA3xc1DA6G7G8ep3szr";
 
 // API Key
 
@@ -37,13 +38,14 @@ const savedLocations = document.querySelector('.saved-locations');
 
 // Weather widget prediction
 
-const daysContainer = document.querySelectorAll('.days');
-const daysCondition = document.querySelector('.weather-condtion');
+
 const futureData = document.querySelector('.days-forecast');
 
 let savedValue;
 
+// Rotation image
 
+const imageRotation = document.querySelectorAll('.container-images');
 
 // Event Listeners
 
@@ -56,7 +58,7 @@ form.addEventListener('submit', (e) => {
     // Next 5 days forecast data (3, 6, 9, 12, 15, 18, 21, 0)
 
     nextDaysData(savedValue);
-    
+    futureData.innerHTML = '';
     
 });
 
@@ -192,7 +194,7 @@ function generateWidgets(data){
 // Convert the result to a readable format
 
 
-    const dataTime = new Date(data.dt * 1000 - (data.timezone * 1000));
+    const dataTime = new Date(data.dt * 1000);
     const dataFormat = dataTime.toLocaleString();
 
     currentTime.children[0].innerHTML = dataFormat;
@@ -202,9 +204,10 @@ function generateWidgets(data){
 
     for(let i of data.weather){
 
-        weatherCond.innerHTML = `<img src='./icons/${i.icon}.png'> 
+        weatherCond.innerHTML = `<img src='./icons/${i.icon}.gif'> 
         <p>${i.description}</p>`;
-
+        const description = i.description;
+        changeImages(description);
     }
 
 
@@ -217,112 +220,89 @@ function futureForecast(data){
 
 // Display next day forecast 
 
-    // let dataFormat = new Date(data.dt * 1000 - (data.city.timezone * 1000));
-    // daysContainer.children[0].innerHTML = dataFormat.toLocaleString();
-
-    data.list.forEach((day) => {
-        
-       switch(day.dt){
-           default:
-            
-            daysContainer.forEach((day) => {
-
-                day.classList.add('active');
-
-            })
-
-            break;
-
-            case 1664204400:    
-
-             // Obtain current city offset in seconds and convert it to miliseconds
-            // Obtain current timezone and convert it to miliseconds
-            // Convert the result to a readable format
-
-                const dayTime1 = document.getElementById('0');
-                let day1 = new Date(day.dt * 1000 - (data.city.timezone * 1000));
-                dayTime1.children[0].innerHTML = day1.toLocaleDateString('en-us', { weekday:"long", day: "numeric"});
-               
-            // Getting the average temperature for the next day and weather condition
-                
-                const tempId0 = document.getElementById('day0');
-
-                tempId0.children[0].innerHTML = `${day.main.temp} &deg`;
-                tempId0.children[1].innerHTML = `${day.weather[0].description}`;
-                
-            break;
-
-            case 1664290800:
-
-           
-
-             // Obtain current city offset in seconds and convert it to miliseconds
-            // Obtain current timezone and convert it to miliseconds
-            // Convert the result to a readable format
-
-                const dayTime2 = document.getElementById('1');
-                
-                let day2 = new Date(day.dt * 1000 - (data.city.timezone * 1000));
-                dayTime2.children[0].innerHTML = day2.toLocaleDateString('en-us', { weekday:"long", day: "numeric"});
-            
-            // Getting the average temperature for the next day and weather condition
-
-                const tempId1 = document.getElementById('day1');
-
-                tempId1.children[0].innerHTML = `${day.main.temp} &deg`;
-                tempId1.children[1].innerHTML = `${day.weather[0].description}`;
-                
-            break;
-
-            case 1664377200:
-
-
-           
-
-             // Obtain current city offset in seconds and convert it to miliseconds
-            // Obtain current timezone and convert it to miliseconds
-            // Convert the result to a readable format
-
-                const dayTime3 = document.getElementById('2');
-                let day3 = new Date(day.dt * 1000 - (data.city.timezone * 1000));
-                dayTime3.children[0].innerHTML = day3.toLocaleDateString('en-us', { weekday:"long", day: "numeric"});
-            
-            // Getting the average temperature for the next day and weather condition
-
-                const tempId2 = document.getElementById('day2');
-
-                tempId2.children[0].innerHTML = `${day.main.temp} &deg`;
-                tempId2.children[1].innerHTML = `${day.weather[0].description}`;
-                
-            break;
-
-            case 1664463600:
-
-
-            // Obtain current city offset in seconds and convert it to miliseconds
-            // Obtain current timezone and convert it to miliseconds
-            // Convert the result to a readable format
-
-                const dayTime4 = document.getElementById('3');
-                let day4 = new Date(day.dt * 1000 - (data.city.timezone * 1000));
-                dayTime4.children[0].innerHTML = day4.toLocaleDateString('en-us', { weekday:"long", day: "numeric"});
-           
-            // Getting the average temperature for the next day and weather condition
-
-                const tempId3 = document.getElementById('day3');
-
-                tempId3.children[0].innerHTML = `${day.main.temp} &deg`;
-                tempId3.children[1].innerHTML = `${day.weather[0].description}`;
-                
-            break;
-
-       }
-        
-    });
-    
    
-    
+    console.log(data);
 
+
+    data.list.forEach((day, index) => {
+        if(index > 1){
+        
+            
+        
+       // Get the future dates from the api forecast
+       var dayname = new Date(day.dt * 1000);
+       // Get hours from the generated future data
+        const hours = dayname.getHours();
+        // Get the day
+        const dayNr = dayname.getDate();
+        // Get name of the day
+        const dayName = dayname.toLocaleDateString('en-US', {weekday: "long"});
+       
+        // If hours are equal to the 3PM, display all the days that has the 3PM in the composition
+       if(hours === 15){
+
+        // Create one section of time display and one section of displaying the weather
+        // Container 
+            console.log(hours, dayname);
+            const date = document.createElement('div');
+            date.classList.add('date');
+            futureData.appendChild(date);
+
+        // Data display
+            const displayDay = document.createElement('h2');
+            displayDay.classList.add('day');
+            date.appendChild(displayDay);
+            displayDay.innerHTML = `${dayNr} ${dayName}`;
+        // Weather display
+
+            const weatherDisplay = document.createElement('div');
+            weatherDisplay.classList.add('weather-condtion');
+            date.appendChild(weatherDisplay);
+
+        // Weather temp
+            const temp = document.createElement('h2');
+            weatherDisplay.appendChild(temp);
+            temp.innerHTML = `${day.main.temp}`
+        // Weather condition
+            const weatherCond = document.createElement('p');
+        // Loop over all images and select the one according to the weather conditions
+            for(let i of day.weather){
+
+                weatherCond.innerHTML = `<img class="weather-image" src='./icons/${i.icon}.gif'>`; 
+                
+        
+            }
+            
+            weatherDisplay.appendChild(weatherCond);
+           
+
+            
+        }
+        
+       
+                
+        
+
+            
+
+           
+            
+            
+
+                  
+
+
+            
+
+            
+            
+            
+        }
+        
+
+
+    })
+    
        
 
     
@@ -343,6 +323,10 @@ function saveToLocal(city, data){
     let save;
     let index = data.id;
     
+    
+    
+    
+    
 
     if(localStorage.getItem('locations') === null){
 
@@ -353,31 +337,34 @@ function saveToLocal(city, data){
 
     }else {
 
-       
+        
 
         save = JSON.parse(localStorage.getItem('locations'));
 
-        // Avoid duplicates by applying a filtering in the save array after it parses the values 
+   
+       
         
-        // save = save.filter((value, index, self) =>
-        // index === self.findIndex((t) => (
-
-        //     t.id === value.id && t.name === value.name
-            
-        // ))
-        // );
 
     // Create a container to display the items saved in the local storage
-    // Make an array that don't allow duplicates 
-    // Iterate over array and take the only the new added items that we want to display in the h tag        
+    // Make an array that don't allow duplicates    
+    // Stop adding again all the items from the array after we input an object
+
+       const cityName = document.createElement('h1');
+       cityName.classList.add('locations');
+       savedLocations.appendChild(cityName);
+       save.forEach((name) => {
+   
+           if(name){
+   
+               cityName.innerHTML = name;
+               console.log(name);
+   
+           }
+           
+   
+   
+       })
     
-        
-            
-            
-
-
-
-        
             
             
 
@@ -397,7 +384,7 @@ function saveToLocal(city, data){
     //      nextDaysData(stored);
     //      cityName.innerHTML = '';
          
-    // })
+    // });
         
 
 
@@ -405,44 +392,29 @@ function saveToLocal(city, data){
 
     // Display only the new added items
     // The rest need to stay on the location history
-
-    const uniqData = [...save.reduce((map, obj) => map.set(obj.id, obj), new Map()).values()];        
-       
-    console.log(uniqData);
-
-    uniqData.forEach((element) => {
-
-        console.log(element);
-        if(element){
-
-            const cityName = document.createElement('h1');
-            cityName.classList.add('locations');
-            savedLocations.appendChild(cityName);
-            cityName.innerHTML = element.name;
-
-        }else{
-
-            cityName.innerHTML = '';
+    // Push a new value inside the array only if it doesn't have already similar values in it
+    
 
 
-        }
+    if(save.indexOf(city) == -1){
+
+         //add the value to the array
+        save.push(city);
+        // Set items in the in the local storage array and converts the values into JSON strings
+        localStorage.setItem("locations",JSON.stringify(save));
+
         
+    
+    }
 
+    
 
-    })
-        
-        
-            
+    
 
-            
+    
 
-    save.push(data);
-
-    localStorage.setItem('locations', JSON.stringify(save));
 
 }
-
-// Remove duplicates inside the array
 
 
 
@@ -457,9 +429,46 @@ function updateInput(e){
 }
 
 
+// Function that checks the time and rotate images after a specific hour
+
+function changeImages(name){
+    
+   // Look over each case inside the description from the api and display specific images according to the weather conditions 
+   
+    switch(name){
+       
+        case 'scattered clouds':
+            document.body.style.backgroundImage = "url('./images/scattered-clouds.jpg')";
+        break;
+        case 'clear sky':
+            document.body.style.backgroundImage = "url('./images/clear-sky.jpg')";
+        break;
+        case 'broken clouds':
+            document.body.style.backgroundImage = "url('./images/broken-clouds.jpg')";
+        break;
+        case 'overcast clouds':
+            document.body.style.backgroundImage = "url('./images/overcast-clouds.jpg')";
+        break;
+        case 'light rain':
+            document.body.style.backgroundImage = "url('./images/clear-sky.jpg')";
+        break;
+        
+        
+        
+
+
+    }
+        
+
+}
+
 
 
 
 // Problems 
 // Avoid displaying duplicates in the location history
-// Next 5 days identifying a property whom values can display the next 5 days forecast
+
+
+// To do
+// Making weather icons animated
+// Making our main widget go after the bottom of page when we scroll
