@@ -20,7 +20,7 @@ const temperatureMax = document.querySelector('.temp-max');
 const feelsLike = document.querySelector('.feels-like');
 const countryName = document.querySelector('.country-name');
 const wind = document.querySelector('.wind');
-const humidity = document.querySelector('.humidity')
+const humidity = document.querySelector('.humidity');
 
 // Open slider 
 
@@ -84,7 +84,7 @@ async function fetchApi(url){
     const dataKey = await fetch(url, {
         method: "GET",
         headers: {}
-        })
+    })
 
     const data = await dataKey.json();
     
@@ -102,7 +102,7 @@ async function fetchApi(url){
 async function displayData(city){
 
 // Fetch all data from the server for a specific city
-
+// Current day
     const fetchLink = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${auth}&units=metric`;
 
     const dataFetch = await fetchApi(fetchLink);
@@ -125,7 +125,7 @@ async function nextDaysData(city){
     const fetchLink = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${auth}&units=metric`;
 
     const dataFetch = await fetchApi(fetchLink);
-
+    console.log(dataFetch);
     futureForecast(dataFetch);
 
     
@@ -136,7 +136,7 @@ function generateWidgets(data){
 
         // Current day forecast
         // Name of the country
-        
+        console.log(data);
         countryName.innerHTML = data.name;
 
         // Insert data automatically into the right parameter
@@ -225,25 +225,27 @@ function futureForecast(data){
 
 
     data.list.forEach((day, index) => {
-        if(index > 1){
+        if(index > 0){
         
-            
+       
         
        // Get the future dates from the api forecast
-       var dayname = new Date(day.dt * 1000);
+       let dayname = new Date(day.dt * 1000);
        // Get hours from the generated future data
-        const hours = dayname.getHours();
+        const hours = dayname.getHours(); 
         // Get the day
         const dayNr = dayname.getDate();
         // Get name of the day
         const dayName = dayname.toLocaleDateString('en-US', {weekday: "long"});
-       
         // If hours are equal to the 3PM, display all the days that has the 3PM in the composition
-       if(hours === 15){
-
+       // Unix needs to be converted into date and get only the hour
+       // If the hour is equal to our chosen hour
+       // Display only the days that equal that hour
+        if(hours === 14){
+        
         // Create one section of time display and one section of displaying the weather
         // Container 
-            console.log(hours, dayname);
+            console.log(dayname)
             const date = document.createElement('div');
             date.classList.add('date');
             futureData.appendChild(date);
@@ -262,7 +264,7 @@ function futureForecast(data){
         // Weather temp
             const temp = document.createElement('h2');
             weatherDisplay.appendChild(temp);
-            temp.innerHTML = `${day.main.temp}`
+            temp.innerHTML = `${day.main.temp}&deg`
         // Weather condition
             const weatherCond = document.createElement('p');
         // Loop over all images and select the one according to the weather conditions
@@ -341,53 +343,6 @@ function saveToLocal(city, data){
 
         save = JSON.parse(localStorage.getItem('locations'));
 
-   
-       
-        
-
-    // Create a container to display the items saved in the local storage
-    // Make an array that don't allow duplicates    
-    // Stop adding again all the items from the array after we input an object
-
-       const cityName = document.createElement('h1');
-       cityName.classList.add('locations');
-       savedLocations.appendChild(cityName);
-       save.forEach((name) => {
-   
-           if(name){
-   
-               cityName.innerHTML = name;
-               console.log(name);
-   
-           }
-           
-   
-   
-       })
-    
-            
-            
-
-
-       
-       
-        
-
-    // Store the latest cities searched in a container 
-    // When i click on each city searched, display the data about it
-        
-        let stored = city;
-        
-    // cityName.addEventListener('click', () => {
-        
-    //      displayData(stored);
-    //      nextDaysData(stored);
-    //      cityName.innerHTML = '';
-         
-    // });
-        
-
-
     }
 
     // Display only the new added items
@@ -462,13 +417,3 @@ function changeImages(name){
 
 }
 
-
-
-
-// Problems 
-// Avoid displaying duplicates in the location history
-
-
-// To do
-// Making weather icons animated
-// Making our main widget go after the bottom of page when we scroll
